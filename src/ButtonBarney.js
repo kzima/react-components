@@ -8,7 +8,7 @@ const ButtonBarney = () => {
   return (
     <div>
       <button className="btn" onClick={() => handleClick("joe")}>
-        Button text here!
+        Button words here!
       </button>
     </div>
   );
