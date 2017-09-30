@@ -3,6 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import ButtonBarney from "./ButtonBarney";
 import HelloWorld from "./HelloWorld";
+import WalkInThePark from "./WalkInThePark";
 
 class App extends Component {
   render() {
@@ -18,6 +19,7 @@ class App extends Component {
         </p>
         <ButtonBarney />
         <HelloWorld />
+        <WalkInThePark />
       </div>
     );
   }
