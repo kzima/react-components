@@ -1,8 +1,6 @@
 import React from "react";
 
 const WalkInThePark = () => {
-  // String to print locations
-  let locationsString;
 
   //list out park locations and distances
   const parkLocations = [
@@ -15,34 +13,30 @@ const WalkInThePark = () => {
   ];
 
   //function to sort array based on distance values
-  const sortLocations = array => {
-    return parkLocations.sort(function(a, b) {
+  const sortLocations = listOfLocations => {
+    return listOfLocations.sort(function(a, b) {
       return a.value - b.value;
     });
   };
-
-  //Loops through and concatenates location Strings
-  const displayLocations = array => {
-    const closestLocations = sortLocations(array);
-    closestLocations.forEach(
-      ({ name, value }) =>
-        (locationsString += `\nThe ${name} is ${value}m away from you.\n`)
-    );
-  };
-
-  //Button that prinnts locations to console
-  const handleClick = () => {
-    displayLocations(parkLocations);
-    console.log(locationsString);
-  };
+  const closestLocations = sortLocations(parkLocations);
 
   return (
-    <div className="helloClass">
-      <button className="btnClass" onClick={() => handleClick()}>
-        Show Me Closest Park Locations
-      </button>
+    <div className="helloClass"> {
+        closestLocations.map(({name, value}) => (
+          <div key={name}> 
+            <div>{`The ${name} is ${value}m away from you.`}</div>
+          </div>
+        ))}
     </div>
   );
 };
 
+/*
+create 'WalkInThePark.story.js' file
+create a demo in storybook.
+improve on the UI.
+User a list component from Mui.
+
+Note: read through addins/knobs -> array
+*/
 export default WalkInThePark;
