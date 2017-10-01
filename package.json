@@ -26,6 +26,7 @@
     "fs-extra": "3.0.1",
     "html-webpack-plugin": "2.29.0",
     "jest": "20.0.4",
+    "material-ui": "^1.0.0-beta.12",
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.6",
@@ -33,6 +34,7 @@
     "react": "^15.6.1",
     "react-dev-utils": "^4.0.1",
     "react-dom": "^15.6.1",
+    "storybook": "^1.0.0",
     "style-loader": "0.18.2",
     "sw-precache-webpack-plugin": "0.11.4",
     "url-loader": "0.5.9",
@@ -41,9 +43,24 @@
     "webpack-manifest-plugin": "1.2.1",
     "whatwg-fetch": "2.0.3"
   },
+  "devDependencies": {
+    "@storybook/addon-actions": "^3.2.0",
+    "@storybook/addon-centered": "^3.2.0",
+    "@storybook/addon-events": "^3.2.0",
+    "@storybook/addon-info": "^3.2.0",
+    "@storybook/addon-knobs": "^3.2.0",
+    "@storybook/addon-links": "^3.2.0",
+    "@storybook/addon-notes": "^3.2.0",
+    "@storybook/addon-options": "^3.2.0",
+    "@storybook/addon-storyshots": "^3.2.0",
+    "@storybook/addons": "^3.2.0",
+    "@storybook/components": "^3.2.0",
+    "@storybook/react": "^3.2.0"
+  },
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
+    "storybook": "start-storybook -p 9010 -s public",
     "test": "node scripts/test.js --env=jsdom"
   },
   "jest": {
