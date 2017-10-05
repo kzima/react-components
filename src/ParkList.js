@@ -1,7 +1,9 @@
 import React from "react";
+import List from "material-ui/List";
 
-const WalkInThePark =  ({ locations }) => {
+import ParkItem from "./ParkItem";
 
+const WalkInThePark = ({ locations }) => {
   //list out park locations and distances
   /*const parkLocations = [
     { id: 1, name: "bench", value: 14 },
@@ -21,15 +23,10 @@ const WalkInThePark =  ({ locations }) => {
   const closestLocations = sortLocations(locations);
 
   return (
-    <div className="helloClass"> {
-        closestLocations.map(({name, value}) => (
-          <div key={name}> 
-            <div>{`The ${name} is ${value}m away from you.`}</div>
-          </div>
-        ))}
-    </div>
+    <List>
+      {closestLocations.map(item => <ParkItem key={item.name} item={item} />)}
+    </List>
   );
 };
-
 
 export default WalkInThePark;
