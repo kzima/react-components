@@ -10,13 +10,10 @@ addDecorator(withMuiTheme);
 addDecorator(withKnobs);
 
 storiesOf("ParkItem", module).add("Item With Params", () => {
-  const item = null;//{ name: text("name", "bench"), value: number("value", 14) };
-
-  if(!!item > 0){
-    return <ParkItem item={item} />;
-  } else {
-    return <div><h1> Where Is The Park Items?</h1></div>
-  }
+  const item = { name: text("name", "bench"), value: number("value", 14) };
+  return <ParkItem item={item} />;
 });
 
-//conditional rendering -- facebook react
+storiesOf("ParkItem", module).add("Item With No Params", () => {
+  return <ParkItem />;
+});

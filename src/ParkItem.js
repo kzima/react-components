@@ -11,6 +11,10 @@ const styles = theme => ({
 });
 
 const ParkItem = props => {
+  if(!props.item){
+    return null;
+  }
+  
   const { classes, item } = props;
   const { name, value } = item;
 
@@ -22,6 +26,7 @@ const ParkItem = props => {
       />
     </ListItem>
   );
+
 };
 
 
