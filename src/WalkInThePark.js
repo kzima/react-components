@@ -1,16 +1,16 @@
 import React from "react";
 
-const WalkInThePark = () => {
+const WalkInThePark =  ({ locations }) => {
 
   //list out park locations and distances
-  const parkLocations = [
-    { name: "bench", value: 14 },
-    { name: "lake", value: 17 },
-    { name: "tree", value: 45 },
-    { name: "swing", value: 2 },
-    { name: "sign", value: 10 },
-    { name: "toilets", value: 37 }
-  ];
+  /*const parkLocations = [
+    { id: 1, name: "bench", value: 14 },
+    { id: 2, name: "lake", value: 17 },
+    { id: 3, name: "tree", value: 45 },
+    { id: 4, name: "swing", value: 2 },
+    { id: 5, name: "sign", value: 10 },
+    { id: 6, name: "toilets", value: 37 }
+  ]; */
 
   //function to sort array based on distance values
   const sortLocations = listOfLocations => {
@@ -18,7 +18,7 @@ const WalkInThePark = () => {
       return a.value - b.value;
     });
   };
-  const closestLocations = sortLocations(parkLocations);
+  const closestLocations = sortLocations(locations);
 
   return (
     <div className="helloClass"> {
@@ -31,12 +31,5 @@ const WalkInThePark = () => {
   );
 };
 
-/*
-create 'WalkInThePark.story.js' file
-create a demo in storybook.
-improve on the UI.
-User a list component from Mui.
 
-Note: read through addins/knobs -> array
-*/
 export default WalkInThePark;
