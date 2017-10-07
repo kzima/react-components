@@ -13,7 +13,9 @@ class CardBarney extends React.Component {
     console.log(this.state);
     return (
       <div>
-        <card>{this.state.fullWidth}</card>
+        <card style={{ width: this.state.fullWidth ? "100%" : "200px" }}>
+          This is a card
+        </card>
       </div>
     );
   }
