@@ -1,0 +1,14 @@
+.btn {
+  color: white;
+  background: purple;
+  padding: 15px;
+}
+
+.helloClass {
+  border: 2px solid red;
+  background-color: gray;
+  color: red;
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
