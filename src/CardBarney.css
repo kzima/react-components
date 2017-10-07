@@ -1,0 +1,7 @@
+card {
+  display: block;
+  width: 200px;
+  height: 200px;
+  background: grey;
+  padding: 15px 0 15px;
+}
