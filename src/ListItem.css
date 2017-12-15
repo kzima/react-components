@@ -1,0 +1,9 @@
+.libtn {
+    color: white;
+    background: gray;
+  }
+
+.libtn:hover {
+    color: black;
+    background: #ccc;  
+  }
