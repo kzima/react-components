@@ -8,14 +8,12 @@ import ListItem from "./ListItem";
 addDecorator(withMuiTheme);
 addDecorator(withKnobs);
 
-storiesOf("ListItem", module).add("anything", () => {
+storiesOf("ListItem", module).add("default", () => {
   const hover = boolean("hover", true);
   return (
     <div>
       <ListItem hover={hover}>
         <p>anything!</p>
-        <button>default</button>
-        <input type="text" />
       </ListItem>
     </div>
   );
