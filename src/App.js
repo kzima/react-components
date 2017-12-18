@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Divider from "./divider/Divider";
-import ListItem from "./ListItem";
-import LI from "./LI";
+import ListItem from "./listitem/ListItem";
 
 class App extends Component {
   render() {
@@ -20,14 +19,11 @@ class App extends Component {
         <Divider light={true} />
         <Divider />
         <Divider light={true} />
-
-        <ListItem hover>anything!</ListItem>
-
-        <LI button={true}>
-          <button>button1</button>
-          <p>text</p>
-          <button>button2</button>
-        </LI>
+        <ListItem hover={true}>
+          <p>anything!</p>
+          <button>default</button>
+          <input type="text" />
+        </ListItem>
       </div>
     );
   }
