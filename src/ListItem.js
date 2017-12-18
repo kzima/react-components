@@ -1,13 +1,12 @@
-import "./ListItem.css";
-import React from 'react';
+import React from "react";
+import "./listItem.css";
+// import HomeIcon from "material-ui-icons/Home";
 
-let p = true;
+const ListItem = props => {
+  const { hover, children } = props;
+  console.log(hover);
+  // <HomeIcon />;
+  return <div className={"hover"}>{children}</div>;
+};
 
-class Greeting extends React.Component {
-  render() {
-    if(p){
-      return <button className="libtn">Hello</button>;
-    }
-  }   
-}
-export default Greeting;
+export default ListItem;
