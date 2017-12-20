@@ -3,6 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import Divider from "./divider/Divider";
 import ListItem from "./listItem/ListItem";
+import PropertyContainer from "./propertyContainer/PropertyContainer";
 
 class App extends Component {
   render() {
@@ -22,6 +23,7 @@ class App extends Component {
         <ListItem hover={true}>
           <p>anything!</p>
         </ListItem>
+        <PropertyContainer />
       </div>
     );
   }
