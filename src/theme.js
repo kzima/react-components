@@ -1,11 +1,11 @@
 import { createMuiTheme } from "material-ui/styles";
 
-import deepOrange from "material-ui/colors/deepOrange";
+import deepOrange500 from "material-ui/colors/deepOrange";
 import blueGrey from "material-ui/colors/blueGrey";
 import red from "material-ui/colors/red";
 import spacing from "material-ui/styles/spacing";
 
-const brandPrimary = deepOrange[500]; //#ff5722
+const brandPrimary = deepOrange500; //#ff5722
 const brandSecondary = blueGrey[500]; //#ff5722
 
 const constants = {
@@ -14,7 +14,7 @@ const constants = {
   brandPrimary,
   brandSecondary,
   palette: {
-    primary: { ...deepOrange, ...brandPrimary }, // Purple and green play nicely together.
+    primary: { ...deepOrange500, ...brandPrimary }, // Purple and green play nicely together.
     secondary: {
       ...blueGrey,
       ...{
