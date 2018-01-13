@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import PropertyContainer from "./propertyContainer/PropertyContainer";
+import fake from "./propertyAttributes/FakePropertyAttributes";
+import PropertyAttributes from "./propertyAttributes/PropertyAttributes";
 
 const fakePropertyAttributes = {
   title: "Address",
@@ -18,6 +20,7 @@ class App extends Component {
           <h2>Welcome to React</h2>
         </div>
         <PropertyContainer property={fakePropertyAttributes} />
+        <PropertyAttributes attributes={fake} />
       </div>
     );
   }
