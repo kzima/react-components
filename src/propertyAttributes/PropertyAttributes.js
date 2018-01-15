@@ -17,13 +17,13 @@ const styles = theme => ({
 
 function FolderList(props) {
   const { classes, attributes } = props;
+  console.log(attributes);
   const items = attributes.map(item => {
+    const Icon = item.icon;
     return (
-      <div className={classes.root}>
+      <div key={item.title} className={classes.root}>
         <ListItem button>
-          <Avatar>
-            <FolderIcon />
-          </Avatar>
+          <Avatar>{item.icon}</Avatar>
           <ListItemText primary={item.value} secondary={item.title} />
           <ListItemIcon>
             <InfoOutline />
