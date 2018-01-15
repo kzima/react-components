@@ -1,12 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "material-ui/styles";
-import List, { ListItem, ListItemText } from "material-ui/List";
+import { ListItem, ListItemText } from "material-ui/List";
 import Avatar from "material-ui/Avatar";
-import FolderIcon from "material-ui-icons/Folder";
 import InfoOutline from "material-ui-icons/InfoOutline";
+<<<<<<< HEAD
 // import ListItemAvatar from "material-ui/List/ListItemAvatar";
+=======
+>>>>>>> 3fdf14464db7ae6299e81df016a40818ef5c3b3f
 import ListItemIcon from "material-ui/List/ListItemIcon";
+import Tooltip from "material-ui/Tooltip";
 
 const styles = theme => ({
   root: {
@@ -20,18 +23,20 @@ function FolderList(props) {
   const { classes, attributes } = props;
   const items = attributes.map(item => {
     return (
-      <div className={classes.root}>
-        <List>
-          <ListItem button>
-            <Avatar>
-              <FolderIcon />
-            </Avatar>
+      <div key={item.title} className={classes.root}>
+        <ListItem button>
+          <Tooltip id="tooltip-icon" title="Icon">
+            <Avatar>{item.icon}</Avatar>
+          </Tooltip>
+          <Tooltip id="tooltip-address" title="Address">
             <ListItemText primary={item.value} secondary={item.title} />
+          </Tooltip>
+          <Tooltip id="tooltip-info" title="Info">
             <ListItemIcon>
               <InfoOutline />
             </ListItemIcon>
-          </ListItem>
-        </List>
+          </Tooltip>
+        </ListItem>
       </div>
     );
   });
