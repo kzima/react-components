@@ -16,7 +16,8 @@ const styles = theme => ({
     display: "inline-block",
     fontSize: "18px",
     verticalAlign: "top",
-    marginTop: "12px"
+    marginTop: "12px",
+    marginLeft: "20px"
   }
 });
 
