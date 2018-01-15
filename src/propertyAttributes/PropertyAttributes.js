@@ -5,7 +5,7 @@ import List, { ListItem, ListItemText } from "material-ui/List";
 import Avatar from "material-ui/Avatar";
 import FolderIcon from "material-ui-icons/Folder";
 import InfoOutline from "material-ui-icons/InfoOutline";
-import ListItemAvatar from "material-ui/List/ListItemAvatar";
+// import ListItemAvatar from "material-ui/List/ListItemAvatar";
 import ListItemIcon from "material-ui/List/ListItemIcon";
 
 const styles = theme => ({

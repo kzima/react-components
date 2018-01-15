@@ -1,9 +1,6 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import PropertyContainer from "./propertyContainer/PropertyContainer";
-import fake from "./propertyAttributes/FakePropertyAttributes";
-import PropertyAttributes from "./propertyAttributes/PropertyAttributes";
 
 const fakePropertyAttributes = {
   title: "Address",
@@ -16,11 +13,9 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+          <h2>OrbMaps - React Components</h2>
         </div>
         <PropertyContainer property={fakePropertyAttributes} />
-        <PropertyAttributes attributes={fake} />
       </div>
     );
   }
