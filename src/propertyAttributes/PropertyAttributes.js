@@ -4,10 +4,6 @@ import { withStyles } from "material-ui/styles";
 import { ListItem, ListItemText } from "material-ui/List";
 import Avatar from "material-ui/Avatar";
 import InfoOutline from "material-ui-icons/InfoOutline";
-<<<<<<< HEAD
-// import ListItemAvatar from "material-ui/List/ListItemAvatar";
-=======
->>>>>>> 3fdf14464db7ae6299e81df016a40818ef5c3b3f
 import ListItemIcon from "material-ui/List/ListItemIcon";
 import Tooltip from "material-ui/Tooltip";
 
