@@ -3,7 +3,8 @@ import { withStyles } from "material-ui/styles";
 const styles = theme => ({
   view: {
     height: 200 + "px",
-    width: "100%"
+    width: "100%",
+    background: "gray"
   }
 });
 const StreetView = props => {

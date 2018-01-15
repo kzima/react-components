@@ -4,25 +4,37 @@ import deepOrange from "material-ui/colors/deepOrange";
 
 import AddressHeader from "../addressHeader/AddressHeader";
 import StreetView from "../streetView/StreetView";
-import Tabs from "material-ui/Tabs";
+import { Tabs, Tab } from "material-ui/Tabs";
 import Button from "material-ui/Button";
 
-import Place from "material-ui-icons/Place";
+import Home from "material-ui-icons/Home";
 import Add from "material-ui-icons/Add";
 
 const styles = theme => ({
   root: {
     height: "100%",
-    width: "35%"
+    width: "25%",
+    position: "relative"
   },
-  icon: {
+  headerIcon: {
     color: "white",
     width: "2.5em",
     height: "2.5em",
-    display: "inline-block"
+    display: "inline-block",
+    marginLeft: "10px"
+  },
+  fabIcon: {
+    color: "white",
+    width: "2.5em",
+    height: "2.5em"
   },
   fab: {
-    backgroundColor: deepOrange[500]
+    backgroundColor: deepOrange[500],
+    position: "absolute",
+    width: 45,
+    height: 45,
+    top: 240,
+    right: 20
   }
 });
 
@@ -37,8 +49,9 @@ class PropertyContainer extends React.Component {
       <div className={this.props.classes.root}>
         <AddressHeader
           title={this.props.property.value}
-          icon={<Place className={this.props.classes.icon} />}
+          icon={<Home className={this.props.classes.headerIcon} />}
         />
+        <StreetView />
         <Button
           fab
           className={this.props.classes.fab}
@@ -46,10 +59,17 @@ class PropertyContainer extends React.Component {
             console.log("FAB");
           }}
         >
-          <Add className={this.props.classes.icon} />
+          <Add className={this.props.classes.fabIcon} />
         </Button>
-        <StreetView />
-        <Tabs />
+
+        {/* <Tabs value={this.props.property.value}>
+          <Tab label="Details">
+            <p> Placeholder for PropertyAttributes </p>
+          </Tab>
+          <Tab label="Constraints">
+            <p> Placeholder for PropertyAttributes </p>
+          </Tab>
+        </Tabs> */}
         {/* <PropertyAttributes /> */}
         {/* <Chart /> */}
       </div>
