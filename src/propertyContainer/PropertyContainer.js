@@ -1,14 +1,17 @@
 import React from "react";
 import { withStyles } from "material-ui/styles";
 import deepOrange from "material-ui/colors/deepOrange";
+import blueGrey from "material-ui/colors/blueGrey";
 
 import AddressHeader from "../addressHeader/AddressHeader";
 import StreetView from "../streetView/StreetView";
-import { Tabs, Tab } from "material-ui/Tabs";
+import Tabs, { Tab } from "material-ui/Tabs";
 import Button from "material-ui/Button";
+import PropertyAttributes from "../propertyAttributes/PropertyAttributes";
 
 import Home from "material-ui-icons/Home";
-import Add from "material-ui-icons/Add";
+import Star from "material-ui-icons/Star";
+// Star for favourite instead of add
 
 const styles = theme => ({
   root: {
@@ -18,15 +21,15 @@ const styles = theme => ({
   },
   headerIcon: {
     color: "white",
-    width: "2.5em",
-    height: "2.5em",
+    width: "2.4em",
+    height: "2.4em",
     display: "inline-block",
-    marginLeft: "10px"
+    marginLeft: "15px"
   },
   fabIcon: {
     color: "white",
-    width: "2.5em",
-    height: "2.5em"
+    width: "2.2em",
+    height: "2.2em"
   },
   fab: {
     backgroundColor: deepOrange[500],
@@ -35,42 +38,55 @@ const styles = theme => ({
     height: 45,
     top: 240,
     right: 20
+  },
+  tabs: {
+    backgroundColor: blueGrey[500]
   }
 });
 
 class PropertyContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { property: this.props.property };
+    this.state = {
+      property: props.property,
+      value: 0
+    };
   }
 
+  handleChange = (event, value) => {
+    this.setState({ value });
+  };
+
   render() {
+    const { classes } = this.props;
+    const { property, value } = this.state;
+
     return (
-      <div className={this.props.classes.root}>
+      <div className={classes.root}>
         <AddressHeader
-          title={this.props.property.value}
-          icon={<Home className={this.props.classes.headerIcon} />}
+          title={property.value}
+          icon={<Home className={classes.headerIcon} />}
         />
         <StreetView />
         <Button
           fab
-          className={this.props.classes.fab}
+          className={classes.fab}
           onClick={() => {
             console.log("FAB");
           }}
         >
-          <Add className={this.props.classes.fabIcon} />
+          <Star className={classes.fabIcon} />
         </Button>
-
-        {/* <Tabs value={this.props.property.value}>
-          <Tab label="Details">
-            <p> Placeholder for PropertyAttributes </p>
-          </Tab>
-          <Tab label="Constraints">
-            <p> Placeholder for PropertyAttributes </p>
-          </Tab>
-        </Tabs> */}
-        {/* <PropertyAttributes /> */}
+        <Tabs
+          className={classes.tabs}
+          value={value}
+          onChange={this.handleChange}
+        >
+          <Tab label="Details" />
+          <Tab label="Constraints" />
+        </Tabs>
+        {value === 0 && <PropertyAttributes attributes={[property]} />}
+        {value === 1 && <PropertyAttributes attributes={[""]} />}
         {/* <Chart /> */}
       </div>
     );

@@ -4,7 +4,6 @@ import { withKnobs, boolean } from "@storybook/addon-knobs";
 
 import withMuiTheme from "../../.storybook/MuiDecorator";
 import PropertyContainer from "./PropertyContainer";
-import { fakeProps } from "./fakeAttr";
 
 addDecorator(withMuiTheme);
 addDecorator(withKnobs);
@@ -12,7 +11,7 @@ addDecorator(withKnobs);
 storiesOf("PropertyContainer", module).add("with text", () => {
   return (
     <div>
-      <PropertyContainer props={fakeProps[0]} />
+      <PropertyContainer props="" />
     </div>
   );
 });
