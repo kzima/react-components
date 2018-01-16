@@ -21,7 +21,7 @@ function FolderList(props) {
     return (
       <div key={item.title} className={classes.root}>
         <ListItem button>
-          <Tooltip id="tooltip-icon" title="Icon">
+          <Tooltip id="tooltip-icon" title={item.tooltip}>
             <Avatar>{item.icon}</Avatar>
           </Tooltip>
           <Tooltip id="tooltip-address" title="Address">
