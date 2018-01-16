@@ -8,6 +8,7 @@ import StreetView from "../streetView/StreetView";
 import Tabs, { Tab } from "material-ui/Tabs";
 import Button from "material-ui/Button";
 import PropertyAttributes from "../propertyAttributes/PropertyAttributes";
+import fakedata from "../propertyAttributes/FakePropertyAttributes";
 
 import Home from "material-ui-icons/Home";
 import Star from "material-ui-icons/Star";
@@ -86,7 +87,7 @@ class PropertyContainer extends React.Component {
           <Tab label="Constraints" />
         </Tabs>
         {value === 0 && <PropertyAttributes attributes={[property]} />}
-        {value === 1 && <PropertyAttributes attributes={[""]} />}
+        {value === 1 && <PropertyAttributes attributes={fakedata} />}
         {/* <Chart /> */}
       </div>
     );

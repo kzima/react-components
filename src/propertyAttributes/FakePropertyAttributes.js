@@ -1,7 +1,7 @@
 import React from "react";
 import FolderIcon from "material-ui-icons/Folder";
 
-const fake = [
+const fakedata = [
   {
     title: "Address",
     value: "5-11 Kenedy Court",
@@ -22,4 +22,4 @@ const fake = [
   }
 ];
 
-export default fake;
+export default fakedata;
