@@ -1,18 +1,51 @@
+// react always at the top
 import React from "react";
+
+// selective imports (with brackets)
 import { withStyles } from "material-ui/styles";
+import Tabs, { Tab } from "material-ui/Tabs";
+
+// default (no brackets) imports
 import deepOrange from "material-ui/colors/deepOrange";
 import blueGrey from "material-ui/colors/blueGrey";
+import Button from "material-ui/Button";
 
+// icons
+import HomeIcon from "material-ui-icons/Home";
+import StarIcon from "material-ui-icons/Star";
+import PlaceIcon from "material-ui-icons/Place";
+import AreaIcon from "material-ui-icons/Texture";
+import ZoneIcon from "material-ui-icons/CropFree";
+
+// relative imports
+import PropertyAttributes from "../propertyAttributes/PropertyAttributes";
 import AddressHeader from "../addressHeader/AddressHeader";
 import StreetView from "../streetView/StreetView";
-import Tabs, { Tab } from "material-ui/Tabs";
-import Button from "material-ui/Button";
-import PropertyAttributes from "../propertyAttributes/PropertyAttributes";
-import fakedata from "../propertyAttributes/FakePropertyAttributes";
 
-import Home from "material-ui-icons/Home";
-import Star from "material-ui-icons/Star";
 // Star for favourite instead of add
+
+const fakeDetails = [
+  {
+    title: "Address",
+    value: "5-11 Kenedy Court",
+    icon: <PlaceIcon />
+  },
+  {
+    title: "Lot/Plan",
+    value: "Lot 1234 RP 12345",
+    icon: <PlaceIcon />
+  },
+  {
+    title: "Property Area",
+    value: "12345 Sq.m",
+    icon: <AreaIcon />
+  },
+  {
+    title: "Zone",
+    value: "Center",
+    icon: <ZoneIcon />
+  }
+];
 
 const styles = theme => ({
   root: {
@@ -66,7 +99,7 @@ class PropertyContainer extends React.Component {
       <div className={classes.root}>
         <AddressHeader
           title={property.value}
-          icon={<Home className={classes.headerIcon} />}
+          icon={<HomeIcon className={classes.headerIcon} />}
         />
         <StreetView />
         <Button
@@ -76,7 +109,7 @@ class PropertyContainer extends React.Component {
             console.log("FAB");
           }}
         >
-          <Star className={classes.fabIcon} />
+          <StarIcon className={classes.fabIcon} />
         </Button>
         <Tabs
           className={classes.tabs}
@@ -86,8 +119,8 @@ class PropertyContainer extends React.Component {
           <Tab label="Details" />
           <Tab label="Constraints" />
         </Tabs>
-        {value === 0 && <PropertyAttributes attributes={[property]} />}
-        {value === 1 && <PropertyAttributes attributes={fakedata} />}
+        {value === 0 && <PropertyAttributes details={fakeDetails} />}
+        {value === 1 && <PropertyAttributes details={fakeDetails} />}
         {/* <Chart /> */}
       </div>
     );
