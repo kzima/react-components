@@ -22,9 +22,6 @@ import PropertyAttributes from "../propertyAttributes/PropertyAttributes";
 import AddressHeader from "../addressHeader/AddressHeader";
 import StreetView from "../streetView/StreetView";
 
-import IconHome from "material-ui-icons/Home";
-import IconStar from "material-ui-icons/Star";
-
 const fakeDetails = [
   {
     title: "Address",
@@ -47,6 +44,13 @@ const fakeDetails = [
     icon: <ZoneIcon />
   }
 ];
+
+const fakeLocation = {
+  apiKey: "AIzaSyA6-yDFJf37v4WPOTtq9fiwU_DitxSzg6I",
+  pano: "fnjXC72UNMw9cDeQOpbGWA",
+  heading: -45,
+  pitch: 10
+};
 
 const styles = theme => ({
   root: {
@@ -71,11 +75,13 @@ const styles = theme => ({
     position: "absolute",
     width: 45,
     height: 45,
-    top: 240,
-    right: 20
+    top: 220,
+    right: 20,
+    zIndex: 30
   },
   tabs: {
-    backgroundColor: blueGrey[500]
+    backgroundColor: blueGrey[500],
+    marginTop: -5
   }
 });
 
@@ -102,7 +108,7 @@ class PropertyContainer extends React.Component {
           title={property.value}
           icon={<HomeIcon className={classes.headerIcon} />}
         />
-        <StreetView props={property.pano} />
+        <StreetView location={fakeLocation} />
         <Button
           fab
           className={classes.fab}

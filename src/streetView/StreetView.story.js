@@ -9,12 +9,12 @@ addDecorator(withMuiTheme);
 addDecorator(withKnobs);
 
 storiesOf("StreetView", module).add("default", () => {
-  const items = {
+  const location = {
     apiKey: "AIzaSyA6-yDFJf37v4WPOTtq9fiwU_DitxSzg6I",
     pano: "fnjXC72UNMw9cDeQOpbGWA",
-    heading: "-45",
-    pitch: "42"
+    heading: -45,
+    pitch: 10
   };
 
-  return <StreetView items={items} />;
+  return <StreetView location={location} />;
 });

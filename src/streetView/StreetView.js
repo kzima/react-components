@@ -1,6 +1,6 @@
 import React from "react";
 import { withStyles } from "material-ui/styles";
-import axios from "axios";
+// import axios from "axios";
 
 import IconKeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import IconKeyboardArrowRight from "material-ui-icons/KeyboardArrowRight";
