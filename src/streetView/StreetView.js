@@ -1,6 +1,6 @@
 import React from "react";
 import { withStyles } from "material-ui/styles";
-// import axios from "axios";
+import axios from "axios";
 
 import IconKeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import IconKeyboardArrowRight from "material-ui-icons/KeyboardArrowRight";
@@ -15,20 +15,32 @@ const styles = theme => ({
   leftArrow: {
     cursor: "pointer",
     position: "absolute",
-    color: "black",
-    width: "2.5em",
-    height: "2.5em",
-    left: 8,
+    backgroundColor: "black",
+    opacity: 0.6,
+    color: "white",
+    width: "2.3em",
+    height: "2.3em",
+    borderRadius: 10,
+    left: 7,
     top: 80
   },
   rightArrow: {
     cursor: "pointer",
     position: "absolute",
-    color: "black",
-    width: "2.5em",
-    height: "2.5em",
-    right: 8,
+    backgroundColor: "black",
+    opacity: 0.6,
+    borderRadius: 10,
+    color: "white",
+    width: "2.3em",
+    height: "2.3em",
+    right: 7,
     top: 80
+  },
+  iconContainer: {
+    cursor: "pointer",
+    position: "absolute",
+    backgroundColor: "black",
+    opacity: 0.7
   }
 });
 
@@ -38,25 +50,37 @@ class StreetView extends React.Component {
 
     this.state = {
       ...props.location,
-      url: this.getUrl(props.location)
+      url: this.getImageUrl(props.location)
     };
   }
 
-  getUrl({ pano, heading, pitch, apiKey }) {
-    return `https://maps.googleapis.com/maps/api/streetview?size=600x300&pano=${pano}&heading=${heading}&pitch=${pitch}&key=${apiKey}`;
+  getImageUrl({ location, pano, heading, pitch, apiKey }) {
+    if (pano) {
+      return `https://maps.googleapis.com/maps/api/streetview?size=600x300&pano=${pano}&heading=${heading}&pitch=${pitch}&key=${apiKey}`;
+    } else {
+      return `https://maps.googleapis.com/maps/api/streetview?size=600x300&location=${location}&heading=${heading}&pitch=${pitch}&key=${apiKey}`;
+    }
   }
 
   componentWillReceiveProps(nextProps) {
-    const url = this.getUrl(nextProps.location);
-    this.setState({
+    const metaUrl = `maps.googleapis.com/maps/api/streetview/metadata?location=${
+      nextProps.location.location
+    }&key=${nextProps.location.apiKey}`;
+
+    https: this.setState({
       ...nextProps.location,
-      url
+      url: this.getImageUrl(nextProps.location)
     });
-    // axios.get(url).then(response => {
-    //   this.setState({
-    //     url: response.request.responseUrl
-    //   });
-    // });
+    axios.get(metaUrl).then(response => {
+      // console.log(response);
+      // console.log(response.headers);
+      // console.log(response.request);
+      // console.log(response.config);
+      console.log(response.pano_id);
+      // this.setState({
+      //   url: response.request.responseUrl
+      // });
+    });
   }
 
   handleArrowClick(direction) {
@@ -68,8 +92,8 @@ class StreetView extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const url = this.getUrl(this.state);
-    // console.log(this.state.heading);
+    const url = this.getImageUrl(this.state);
+    console.log(url);
 
     return (
       <div className={classes.root}>
