@@ -8,10 +8,13 @@ import PropertyContainer from "./PropertyContainer";
 addDecorator(withMuiTheme);
 addDecorator(withKnobs);
 
-storiesOf("PropertyContainer", module).add("with text", () => {
-  return (
-    <div>
-      <PropertyContainer props="" />
-    </div>
-  );
+storiesOf("PropertyContainer", module).add("default", () => {
+  const props = {
+    title: "Address",
+    value: "5-11 Kenedy Court, Logan",
+    icon: "SomeIcon",
+    pano: "fnjXC72UNMw9cDeQOpbGWA"
+  };
+
+  return <PropertyContainer props={props} />;
 });

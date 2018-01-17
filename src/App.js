@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import PropertyContainer from "./propertyContainer/PropertyContainer";
 
-const fakePropertyAttributes = {
+const props = {
   title: "Address",
   value: "5-11 Kenedy Court, Logan",
   icon: "SomeIcon"
@@ -15,7 +15,7 @@ class App extends Component {
         <div className="App-header">
           <h2>OrbMaps - React Components</h2>
         </div>
-        <PropertyContainer property={fakePropertyAttributes} />
+        <PropertyContainer property={props} />
       </div>
     );
   }

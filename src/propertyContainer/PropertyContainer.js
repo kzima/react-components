@@ -11,12 +11,11 @@ import PropertyAttributes from "../propertyAttributes/PropertyAttributes";
 
 import Home from "material-ui-icons/Home";
 import Star from "material-ui-icons/Star";
-// Star for favourite instead of add
 
 const styles = theme => ({
   root: {
     height: "100%",
-    width: "25%",
+    maxWidth: 360,
     position: "relative"
   },
   headerIcon: {
@@ -67,7 +66,7 @@ class PropertyContainer extends React.Component {
           title={property.value}
           icon={<Home className={classes.headerIcon} />}
         />
-        <StreetView />
+        <StreetView props={property.pano} />
         <Button
           fab
           className={classes.fab}
