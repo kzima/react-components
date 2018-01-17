@@ -2,16 +2,8 @@ import React from "react";
 import { withStyles } from "material-ui/styles";
 import axios from "axios";
 
-import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
-import KeyboardArrowRight from "material-ui-icons/KeyboardArrowRight";
-
-// pano id from url which loads the image
-// apiKey
-// latlng
-// pano
-
-// whenMount queries, axios
-// heading by arrows + 45
+import IconKeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
+import IconKeyboardArrowRight from "material-ui-icons/KeyboardArrowRight";
 
 const styles = theme => ({
   root: {
@@ -21,6 +13,7 @@ const styles = theme => ({
     //height: "auto" // this height value needs to relate to the fab button
   },
   leftArrow: {
+    cursor: "pointer",
     position: "absolute",
     color: "black",
     width: "2.5em",
@@ -29,6 +22,7 @@ const styles = theme => ({
     top: 80
   },
   rightArrow: {
+    cursor: "pointer",
     position: "absolute",
     color: "black",
     width: "2.5em",
@@ -40,76 +34,52 @@ const styles = theme => ({
 
 class StreetView extends React.Component {
   constructor(props) {
-    console.log("Constructor");
     super(props);
-    const { items } = props;
 
     this.state = {
-      apiKey: items.apiKey,
-      pano: items.pano,
-      pitch: items.pitch,
-      heading: items.heading,
-      url: "",
-      img: ""
+      ...props.location,
+      url: this.getUrl(props.location)
     };
-    console.log("STATE SET");
-    console.log(this.state);
   }
 
-  getUrl() {
-    console.log("GetUrl");
-    return `https://maps.googleapis.com/maps/api/streetview?size=600x300&pano=${
-      this.state.pano
-    }&heading=${this.state.heading}&pitch=${this.state.pitch}&key=${
-      this.state.apiKey
-    }`;
+  getUrl({ pano, heading, pitch, apiKey }) {
+    return `https://maps.googleapis.com/maps/api/streetview?size=600x300&pano=${pano}&heading=${heading}&pitch=${pitch}&key=${apiKey}`;
   }
 
-  getBase64(url) {
-    console.log("GetBase64");
-    return axios
-      .get(url, {
-        responseType: "arraybuffer"
-      })
-      .then(response => {
-        new Buffer(response.data, "binary").toString("base64");
-        console.log("axios request");
-        console.log(response);
-        var image = btoa(String.fromCharCode.apply(null, response.data));
-
-        this.setState({ img: "data:image/png;base64," + image });
-      });
-  }
-
-  componentWillReceiveProps({ items }) {
-    console.log("compWillRecieve");
-    console.log(items);
-
+  componentWillReceiveProps(nextProps) {
+    const url = this.getUrl(nextProps.location);
     this.setState({
-      pano: items.pano,
-      heading: items.heading,
-      pitch: items.pitch,
-      apiKey: items.apiKey,
-      url: this.getUrl()
+      ...nextProps.location,
+      url
     });
+    // axios.get(url).then(response => {
+    //   this.setState({
+    //     url: response.request.responseUrl
+    //   });
+    // });
   }
 
-  handleHeadingChange(direction) {
-    const currentPitch = this.state.pitch;
-    this.setState({
-      pitch: currentPitch + direction * 45
+  handleArrowClick(direction) {
+    // console.log(direction);
+    this.setState(prevState => {
+      return { heading: prevState.heading + direction * 45 };
     });
   }
 
   render() {
-    console.log("Render");
     const { classes } = this.props;
+    const url = this.getUrl(this.state);
+    // console.log(this.state.heading);
 
     return (
       <div className={classes.root}>
-        <img className={classes.root} src={this.state.img} alt="" />
-        <KeyboardArrowLeft className={classes.leftArrow} />
-        <KeyboardArrowRight className={classes.rightArrow} />
+        <img className={classes.root} src={url} alt="" />
+        <div onClick={this.handleArrowClick.bind(this, -1)}>
+          <IconKeyboardArrowLeft className={classes.leftArrow} />
+        </div>
+        <div onClick={this.handleArrowClick.bind(this, 1)}>
+          <IconKeyboardArrowRight className={classes.rightArrow} />
+        </div>
       </div>
     );
   }

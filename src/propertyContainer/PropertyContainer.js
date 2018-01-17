@@ -22,12 +22,8 @@ import PropertyAttributes from "../propertyAttributes/PropertyAttributes";
 import AddressHeader from "../addressHeader/AddressHeader";
 import StreetView from "../streetView/StreetView";
 
-<<<<<<< HEAD
-import Home from "material-ui-icons/Home";
-import Star from "material-ui-icons/Star";
-=======
-// Star for favourite instead of add
->>>>>>> e120ed281bfd515aaf7a7f7f7d8447b524bc06cc
+import IconHome from "material-ui-icons/Home";
+import IconStar from "material-ui-icons/Star";
 
 const fakeDetails = [
   {
