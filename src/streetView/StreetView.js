@@ -47,7 +47,6 @@ const styles = theme => ({
 class StreetView extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       ...props.location,
       url: this.getImageUrl(props.location)
@@ -55,6 +54,7 @@ class StreetView extends React.Component {
   }
 
   getImageUrl({ location, pano, heading, pitch, apiKey }) {
+    // Use pano if present, need to test with new props
     if (pano) {
       return `https://maps.googleapis.com/maps/api/streetview?size=600x300&pano=${pano}&heading=${heading}&pitch=${pitch}&key=${apiKey}`;
     } else {
@@ -63,37 +63,29 @@ class StreetView extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const metaUrl = `maps.googleapis.com/maps/api/streetview/metadata?location=${
+    const metaUrl = `https://maps.googleapis.com/maps/api/streetview/metadata?location=${
       nextProps.location.location
     }&key=${nextProps.location.apiKey}`;
 
-    https: this.setState({
-      ...nextProps.location,
-      url: this.getImageUrl(nextProps.location)
-    });
     axios.get(metaUrl).then(response => {
-      // console.log(response);
-      // console.log(response.headers);
-      // console.log(response.request);
-      // console.log(response.config);
-      console.log(response.pano_id);
-      // this.setState({
-      //   url: response.request.responseUrl
-      // });
+      nextProps.location["pano"] = response.data.pano_id;
+      this.setState({
+        ...nextProps.location,
+        url: this.getImageUrl(nextProps.location)
+      });
     });
   }
 
   handleArrowClick(direction) {
-    // console.log(direction);
+    // Works on 45 degree jumps but could need more versatility
     this.setState(prevState => {
-      return { heading: prevState.heading + direction * 45 };
+      return { heading: (prevState.heading + direction * 45 + 360) % 360 };
     });
   }
 
   render() {
     const { classes } = this.props;
     const url = this.getImageUrl(this.state);
-    console.log(url);
 
     return (
       <div className={classes.root}>
