@@ -67,28 +67,37 @@ class StreetView extends React.Component {
   componentWillReceiveProps(nextProps) {
     const { latLng, apiKey } = nextProps;
     if (latLng && latLng !== this.props.latLng) {
-      const metaUrl = `https://maps.googleapis.com/maps/api/streetview/metadata?location=${latLng}&key=${apiKey}`;
-      this.setState({
-        loading: true
-      });
-      axios
-        .get(metaUrl)
-        .then(response => {
-          this.pano = response.data.pano_id;
-          this.setState({
-            loading: false,
-            url: `https://maps.googleapis.com/maps/api/streetview?size=500x300&pano=${
-              this.pano
-            }&heading=${this.heading}&pitch=0&key=${apiKey}`
-          });
-        })
-        .catch(() => {
-          this.setState({
-            loading: false
-          });
-        });
+      this.loadData(latLng, apiKey);
     }
   }
+
+  componentWillMount() {
+    const { latLng, apiKey } = this.props;
+    this.loadData(latLng, apiKey);
+  }
+
+  loadData = (latLng, apiKey) => {
+    const metaUrl = `https://maps.googleapis.com/maps/api/streetview/metadata?location=${latLng}&key=${apiKey}`;
+    this.setState({
+      loading: true
+    });
+    axios
+      .get(metaUrl)
+      .then(response => {
+        this.pano = response.data.pano_id;
+        this.setState({
+          loading: false,
+          url: `https://maps.googleapis.com/maps/api/streetview?size=500x300&pano=${
+            this.pano
+          }&heading=${this.heading}&pitch=0&key=${apiKey}`
+        });
+      })
+      .catch(() => {
+        this.setState({
+          loading: false
+        });
+      });
+  };
 
   handleArrowClick(direction) {
     const { apiKey } = this.props;
