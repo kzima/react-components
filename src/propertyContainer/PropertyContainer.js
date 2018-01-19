@@ -45,11 +45,9 @@ const fakeDetails = [
   }
 ];
 
-const fakeLocation = {
+const fakeData = {
   apiKey: "AIzaSyA6-yDFJf37v4WPOTtq9fiwU_DitxSzg6I",
-  location: "-27.694572061615098,153.07980671525004",
-  heading: -45,
-  pitch: 10
+  latLng: "-27.694572061615098,153.07980671525004"
 };
 
 const styles = theme => ({
@@ -108,7 +106,7 @@ class PropertyContainer extends React.Component {
           title={property.value}
           icon={<HomeIcon className={classes.headerIcon} />}
         />
-        <StreetView location={fakeLocation} />
+        <StreetView latLng={fakeData.latLng} apiKey={fakeData.apiKey} />
         <Button
           fab
           className={classes.fab}

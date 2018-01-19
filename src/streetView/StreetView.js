@@ -1,5 +1,6 @@
 import React from "react";
 import { withStyles } from "material-ui/styles";
+import { CircularProgress } from "material-ui/Progress";
 import axios from "axios";
 
 import IconKeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
@@ -7,10 +8,13 @@ import IconKeyboardArrowRight from "material-ui-icons/KeyboardArrowRight";
 
 const styles = theme => ({
   root: {
-    maxWidth: 360,
+    width: "100%",
     height: "auto",
-    position: "relative"
-    //height: "auto" // this height value needs to relate to the fab button
+    minHeight: 235,
+    position: "relative",
+    alignItems: "center",
+    justifyContent: "center",
+    display: "flex"
   },
   leftArrow: {
     cursor: "pointer",
@@ -22,7 +26,7 @@ const styles = theme => ({
     height: "2.3em",
     borderRadius: 10,
     left: 7,
-    top: 80
+    top: 100
   },
   rightArrow: {
     cursor: "pointer",
@@ -34,13 +38,18 @@ const styles = theme => ({
     width: "2.3em",
     height: "2.3em",
     right: 7,
-    top: 80
+    top: 100
   },
   iconContainer: {
     cursor: "pointer",
     position: "absolute",
     backgroundColor: "black",
     opacity: 0.7
+  },
+  wrapper: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
   }
 });
 
@@ -48,54 +57,71 @@ class StreetView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      ...props.location,
-      url: this.getImageUrl(props.location)
+      url: null,
+      loading: true
     };
-  }
-
-  getImageUrl({ location, pano, heading, pitch, apiKey }) {
-    // Use pano if present, need to test with new props
-    if (pano) {
-      return `https://maps.googleapis.com/maps/api/streetview?size=600x300&pano=${pano}&heading=${heading}&pitch=${pitch}&key=${apiKey}`;
-    } else {
-      return `https://maps.googleapis.com/maps/api/streetview?size=600x300&location=${location}&heading=${heading}&pitch=${pitch}&key=${apiKey}`;
-    }
+    this.pano = null;
+    this.heading = 0;
   }
 
   componentWillReceiveProps(nextProps) {
-    const metaUrl = `https://maps.googleapis.com/maps/api/streetview/metadata?location=${
-      nextProps.location.location
-    }&key=${nextProps.location.apiKey}`;
-
-    axios.get(metaUrl).then(response => {
-      nextProps.location["pano"] = response.data.pano_id;
+    const { latLng, apiKey } = nextProps;
+    if (latLng && latLng !== this.props.latLng) {
+      const metaUrl = `https://maps.googleapis.com/maps/api/streetview/metadata?location=${latLng}&key=${apiKey}`;
       this.setState({
-        ...nextProps.location,
-        url: this.getImageUrl(nextProps.location)
+        loading: true
       });
-    });
+      axios
+        .get(metaUrl)
+        .then(response => {
+          this.pano = response.data.pano_id;
+          this.setState({
+            loading: false,
+            url: `https://maps.googleapis.com/maps/api/streetview?size=500x300&pano=${
+              this.pano
+            }&heading=${this.heading}&pitch=0&key=${apiKey}`
+          });
+        })
+        .catch(() => {
+          this.setState({
+            loading: false
+          });
+        });
+    }
   }
 
   handleArrowClick(direction) {
-    // Works on 45 degree jumps but could need more versatility
-    this.setState(prevState => {
-      return { heading: (prevState.heading + direction * 45 + 360) % 360 };
+    const { apiKey } = this.props;
+    this.heading = (this.heading + direction * 45 + 360) % 360;
+    this.setState({
+      url: `https://maps.googleapis.com/maps/api/streetview?size=500x300&pano=${
+        this.pano
+      }&heading=${this.heading}&pitch=0&key=${apiKey}`
     });
   }
 
   render() {
     const { classes } = this.props;
-    const url = this.getImageUrl(this.state);
-
+    const { url, loading } = this.state;
     return (
       <div className={classes.root}>
-        <img className={classes.root} src={url} alt="" />
-        <div onClick={this.handleArrowClick.bind(this, -1)}>
-          <IconKeyboardArrowLeft className={classes.leftArrow} />
-        </div>
-        <div onClick={this.handleArrowClick.bind(this, 1)}>
-          <IconKeyboardArrowRight className={classes.rightArrow} />
-        </div>
+        {loading ? (
+          <CircularProgress
+            size={80}
+            className={classes.progress}
+            color="accent"
+          />
+        ) : (
+          <div>
+            <img className={classes.root} src={url} alt="" />
+            <div onClick={this.handleArrowClick.bind(this, -1)}>
+              <IconKeyboardArrowLeft className={classes.leftArrow} />
+            </div>
+            <div onClick={this.handleArrowClick.bind(this, 1)}>
+              <IconKeyboardArrowRight className={classes.rightArrow} />
+            </div>
+          </div>
+        )}
       </div>
     );
   }
